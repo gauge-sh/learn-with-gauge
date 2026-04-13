@@ -4,23 +4,3 @@
   color: #051b23 !important;
   text-shadow: none !important;
 }
-
-/* Navbar/topbar — neon yellow background, dark text */
-header,
-[class*="navbar"],
-[class*="topbar"],
-nav:first-of-type,
-.sticky.top-0 {
-  background-color: #e8ff3f !important;
-  color: #051b23 !important;
-  border-bottom-color: #c5dd19 !important;
-}
-
-/* Ensure all text and links in the navbar are dark */
-header a,
-header button,
-header span,
-[class*="navbar"] a,
-[class*="navbar"] button {
-  color: #051b23 !important;
-}
