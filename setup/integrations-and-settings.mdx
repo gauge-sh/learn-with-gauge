@@ -14,43 +14,64 @@ description: "Connect your data sources and configure your Gauge workspace to st
 ## Summary
 
 <Note>
-  This lesson walks you through setting up your Gauge workspace — connecting integrations, configuring your brand profile, and adding the prompts you want to track.
+  This lesson walks you through setting up your Gauge workspace - adding your brand, connecting integrations, configuring your prompts, and getting your first data pull running.
 </Note>
 
 **Key Concepts:**
-- Connecting your brand profile and competitors
-- Adding the prompts Gauge will monitor
-- Configuring notification and reporting settings
-- Available integrations (Slack, etc.)
+- Add your brand profile and the competitors you want to track against
+- Connect GA4 and Google Search Console to unlock AI referral traffic and cross-channel analysis
+- Add prompts - the specific queries Gauge will monitor daily across all AI engines
+- Connect Slack for automated alerts and weekly digests
+- Gauge runs every prompt through every model every day, starting after midnight
 
 ## Overview
 
 ### Setting Up Your Brand Profile
 
-[Explain how to set up your brand profile in Gauge — entering your brand name, website, and key competitors you want to track against. This is the foundation of all your AEO monitoring.]
+Your brand profile is the foundation of everything in Gauge. Start by entering your brand name, website domain, and the competitors you want to benchmark against. Gauge uses this to structure your visibility and ranking data in a competitive context from day one.
 
-### Adding Prompts to Track
+For companies managing multiple brands in the same market, Gauge supports multi-brand setups - you can set a primary brand per category.
 
-[Explain how to add the prompts you want Gauge to monitor. Walk through best practices for choosing prompts — mix of industry queries, comparison queries, and use-case specific searches that your target customers are likely asking in AI tools.]
+### Adding Prompts
 
-### Adding Competitors
+Prompts are the specific queries Gauge monitors daily across every AI engine. These should represent the questions your target customers are actually asking AI tools - about the problem your product solves, the category you're in, and the comparisons they're making.
 
-[Explain how to add competitor brands to your Gauge workspace so you can benchmark your AEO performance against them in rankings and visibility.]
+**Best practices for building your prompt set:**
+- Mix **industry/problem prompts** ("best tools for tracking AI search visibility") with **comparison prompts** ("[Your Brand] vs [Competitor]") and **branded queries** ("What is [Your Brand]?")
+- Use longer, more specific queries - AI engines average 6.8–7 words per query, so short queries are less representative
+- Start with 20–50 prompts and expand from there. Gauge's prompt generation feature can help you expand keyword research into a full prompt library
+- One country is included in all plans. Multiple countries are available on Enterprise for geo-targeted IP tracking
 
-### Configuring Notifications
+<Warning>
+  Add at least 10–20 prompts before your first data pull. The more prompts you track, the more complete your visibility picture will be.
+</Warning>
 
-[Describe the notification options available — email digests, Slack alerts for significant changes in visibility or rankings, and report frequency settings.]
+### GA4 Integration
+
+Connect Google Analytics 4 to unlock AI Referral Traffic tracking - real, page-level sessions originating from ChatGPT, Perplexity, Gemini, and other AI platforms. Once connected, Gauge surfaces this data alongside your visibility metrics so you can connect AI mentions to actual business outcomes.
+
+### Google Search Console Integration
+
+Connect Google Search Console to bring your traditional search performance data into Ask Gauge. Once connected, the Ask Gauge agent can analyze your GSC data alongside your AI visibility data - identifying where strong SEO performance isn't translating into AI visibility, and where new content could serve both channels.
+
+### Semrush Integration
+
+Ask Gauge can also work with Semrush data. Connect your Semrush account to give the agent access to keyword research, competitive SEO data, and backlink analysis alongside your GEO data.
 
 ### Slack Integration
 
-[Walk through how to connect Gauge to your Slack workspace so your team receives AEO updates directly in a channel of your choice.]
+Connect Gauge to a Slack channel to receive automated alerts when your visibility or rankings change significantly, plus weekly digest reports. Set this up in **Settings → Integrations → Slack**.
 
-<Warning>
-  Make sure to add at least 5–10 prompts before your first data pull — the more prompts you track, the more comprehensive your visibility picture will be.
-</Warning>
+### Webflow CMS Integration
+
+Gauge supports direct publishing of generated content to your Webflow CMS. Once connected, content created through the Content Engine or Ask Gauge agent can go straight into your CMS - no copy-pasting required. Framer and Sanity integrations are planned next.
+
+### Data Freshness
+
+Gauge runs every prompt through every AI engine every day, starting after midnight, with processing completing through the morning. A status indicator in the platform shows data freshness in real time - green means today's prompts are complete, yellow means they're still processing.
 
 <Tip>
-  Not sure which prompts to add? Think about how your customers would ask an AI tool about the problem your product solves — not your brand name, but the problem itself.
+  Connect GA4 and GSC early - even if you don't use the Ask Gauge agent right away. Gauge will start accumulating historical data from the moment you connect, and the agent's analysis gets significantly more powerful with more data behind it.
 </Tip>
 
 ---

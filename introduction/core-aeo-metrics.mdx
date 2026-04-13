@@ -14,40 +14,68 @@ description: "Learn the key metrics Gauge tracks to measure your brand's visibil
 ## Summary
 
 <Note>
-  This lesson introduces the core metrics you'll see throughout Gauge — what they mean and how to use them to evaluate your AEO performance.
+  This lesson introduces every metric you'll see in Gauge - what each one measures, why it matters, and how to use them together to assess your AEO performance.
 </Note>
 
 **Key Concepts:**
-- Visibility: how often your brand appears in AI-generated answers
-- Rankings: where your brand ranks relative to competitors in AI responses
-- Citations: when an AI engine links or refers to your content as a source
-- Prompts: the specific queries being tracked to monitor your presence
-- Branded Prompts: prompts that directly mention your brand name
+- Brand Visibility = the % of AI answers where your brand appears
+- Citation Rate vs Mention Rate - these are different and both matter
+- Health Score grades your content against 9 criteria for AI optimization
+- Rank tracks your competitive position when multiple brands appear in the same answer
+- AI Referral Traffic connects what Gauge tracks to actual sessions in GA4
 
 ## Overview
 
-### Visibility
+### Brand Visibility
 
-[Explain visibility as the core metric — the percentage of relevant AI-generated answers in which your brand appears in some form. Higher visibility means your brand is more present in the answers your target audience is seeing.]
+**Definition:** The percentage of AI-generated answers to your tracked prompts that include a mention of your brand.
 
-### Rankings
+This is the headline metric. A visibility score of 60% means your brand appears in 60 out of every 100 responses to your tracked prompts across the AI engines you're monitoring. It's the clearest single indicator of how present your brand is in the AI search landscape relevant to your business.
 
-[Explain how Gauge ranks brands within AI responses. When an AI engine mentions multiple brands in response to a query, Gauge tracks the order and frequency to give you a relative ranking against competitors.]
+### URL Citation Rate
 
-### Citations
+**Definition:** The percentage of AI-generated answers that cite a specific URL from your domain as a source.
 
-[Explain citations — when an AI engine directly links to or credits a specific URL or source from your brand. Citations are a strong signal of authority and are tracked separately from general mentions.]
+Citations are the raw material of GEO. When an AI engine cites your content, it's treating your page as an authoritative source. Gauge tracks this at both the domain level (aggregate) and URL level (page by page), so you can see exactly which content is earning trust with AI engines.
 
-### Prompts
+### URL Mention Rate
 
-[Explain that Gauge monitors a defined set of prompts — queries that represent how your target customers are searching in AI tools. These can be industry questions, comparison queries, or use-case specific searches.]
+**Definition:** The percentage of answers where your brand name is explicitly mentioned when your URL is cited.
 
-### Branded Prompts
+This is the metric that catches most teams off guard. AI models frequently pull your content as a source but generate an answer that doesn't name your brand at all. A high citation rate combined with a low mention rate means AI is using your content but not crediting you. Closing this gap - through brand-linked examples, proprietary data, and first-person perspectives - is one of the highest-value actions in GEO.
 
-[Explain branded prompts — prompts that include your brand name directly, such as "What does [Brand] do?" or "Is [Brand] good for X?" These are tracked to monitor brand perception and direct brand queries in AI tools.]
+### Rank
+
+**Definition:** Your brand's position relative to competitors when multiple brands are mentioned in the same AI-generated answer.
+
+Rank 1 means your brand is mentioned first. Higher numbers indicate your brand appears later or less prominently. Gauge tracks this across all your prompts and surfaces your average rank as well as per-prompt breakdowns.
+
+### Health Score
+
+**Definition:** A 9-criteria technical grade that scores each page in your sitemap against key criteria for AI and traditional search optimization.
+
+Gauge runs a nightly audit of your content against 9 optimization criteria and assigns a health score per page. This identifies specific technical and structural improvements you can make to increase the likelihood that AI engines cite your content. The audit re-runs every night with a manual re-trigger option when you publish new content.
+
+### AI Referral Traffic
+
+**Definition:** Real page-level sessions originating from AI platforms (ChatGPT, Perplexity, Gemini, etc.), tracked via GA4 integration.
+
+This connects everything Gauge tracks to actual business outcomes. Once you connect GA4, Gauge surfaces the actual traffic your brand is receiving from AI platforms at the page level - so you can see which AI engines are driving real sessions, not just mentions.
+
+### Leads from AI Search
+
+**Definition:** Conversion attribution from AI-originated discovery sessions.
+
+Track not just traffic but actual leads and conversions traced back to AI search as the discovery channel. This is the metric that justifies GEO investment to leadership.
+
+### Category Performance
+
+**Definition:** Cross-topic visibility breakdown comparing your brand to competitors across different prompt categories.
+
+Rather than looking at individual prompts in isolation, Category Performance gives you an aggregated view of how you're performing across thematic groups - by feature set, use case, market segment, or competitor comparison topic.
 
 <Tip>
-  Start by reviewing your Visibility and Rankings scores together — a high visibility score with a low ranking means you're being mentioned but not recommended first.
+  Start with Visibility and Citation Rate together. A high visibility score with a low citation rate suggests your brand is being mentioned without your content being treated as a source - a signal to build more authoritative, citable content.
 </Tip>
 
 ---

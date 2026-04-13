@@ -1,0 +1,66 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "theme": "mint",
+  "name": "Gauge Learn",
+  "colors": {
+    "primary": "#0D9373",
+    "light": "#07C983",
+    "dark": "#0D9373"
+  },
+  "favicon": "/favicon.svg",
+  "navigation": {
+    "groups": [
+      {
+        "group": "Introduction",
+        "pages": [
+          "introduction/welcome",
+          "introduction/what-is-aeo",
+          "introduction/core-aeo-metrics"
+        ]
+      },
+      {
+        "group": "Setup",
+        "pages": [
+          "setup/integrations-and-settings"
+        ]
+      },
+      {
+        "group": "Navigating Gauge",
+        "pages": [
+          "navigating/rankings-visibility",
+          "navigating/prompts-citations",
+          "navigating/action-center",
+          "navigating/ask-gauge",
+          "navigating/reddit",
+          "navigating/chatgpt-ads",
+          "navigating/branded-prompts"
+        ]
+      },
+      {
+        "group": "Resources",
+        "pages": [
+          "resources/glossary",
+          "resources/faq",
+          "resources/changelog"
+        ]
+      }
+    ]
+  },
+  "logo": {
+    "light": "/logo/light.svg",
+    "dark": "/logo/dark.svg"
+  },
+  "navbar": {
+    "links": [
+      {
+        "label": "Back to Gauge",
+        "href": "https://app.withgauge.com"
+      }
+    ]
+  },
+  "footer": {
+    "socials": {
+      "website": "https://withgauge.com"
+    }
+  }
+}

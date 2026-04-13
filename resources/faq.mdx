@@ -9,75 +9,92 @@ description: "Answers to the most common questions from new Gauge customers."
 
 ### What AI engines does Gauge track?
 
-[List the AI engines currently supported by Gauge — e.g., ChatGPT, Perplexity, Google Gemini, Microsoft Copilot, etc. Update this list as new engines are added.]
+Gauge tracks ChatGPT, Google AI Overviews, Google AI Mode, Gemini, Perplexity, and Microsoft Copilot on the Growth plan. The Enterprise plan adds Claude (Anthropic) and xAI Grok. The Starter plan tracks ChatGPT only.
+
+Claude tracking is Enterprise-tier because collecting data from Anthropic requires API requests (Claude has no logged-out web interface), which is significantly more expensive than Gauge's standard scraping approach.
 
 ---
 
-### How often does Gauge update my visibility and rankings data?
+### How often does Gauge update my data?
 
-[Explain the data refresh cadence — how frequently Gauge re-runs your tracked prompts against AI engines and updates your dashboard. Include any differences between plan tiers if applicable.]
-
----
-
-### How do I add a new prompt to track?
-
-Go to the **Prompts** section in your Gauge dashboard and click **Add Prompt**. Enter the query you want to monitor, select which AI engines to track it on, and save. New prompts typically appear in your dashboard within [X hours] of their first data pull.
+Gauge runs every prompt through every configured AI engine every day. Runs begin after midnight and complete through the morning. A status indicator in the platform shows data freshness in real time: green means today's prompts are complete, yellow means they're still processing.
 
 ---
 
-### Why isn't my brand appearing in AI responses?
+### How is Gauge different from just manually testing AI responses?
 
-There are a few common reasons:
-- Your brand may not yet have enough authoritative, citable content for AI engines to pull from
-- The prompts you're tracking may not be closely aligned with the content you've published
-- Competitors may have significantly stronger citation footprints for those queries
+Three reasons manual testing doesn't work at scale:
 
-The Action Center in Gauge will surface specific recommendations to address these gaps.
-
----
-
-### How is AEO different from SEO?
-
-SEO optimizes for ranking in a list of links on a traditional search engine results page. AEO optimizes for being mentioned, cited, or recommended within an AI-generated conversational answer. The metrics, signals, and content strategies are different — though strong SEO often supports strong AEO.
+1. **Personalization** — AI responses are heavily influenced by user identity, chat history, and account context. Manually testing from your own account gives you personalized results, not ground truth. Gauge uses anonymous, logged-out sessions specifically to get unbiased data.
+2. **Scale** — you can't manually test hundreds of prompts across six AI engines every day.
+3. **Trend data** — manual testing gives you a snapshot. Gauge gives you daily trend data so you can see changes over time and correlate them with actions you've taken.
 
 ---
 
-### Can I track competitors in Gauge?
+### Does good SEO mean good AEO?
 
-Yes. You can add competitor brands to your Gauge workspace and track their visibility, rankings, and citations alongside your own. This benchmarking data helps you understand where you're leading or falling behind.
-
----
-
-### How do I share my Gauge data with my team?
-
-[Explain the available sharing options — team member invitations, exported reports, Slack integration, or scheduled email digests. Update with specific steps.]
-
----
-
-### What should I do if AI engines are saying something inaccurate about my brand?
-
-Gauge will surface inaccurate AI responses in your Branded Prompts view. The most effective remediation strategy is to publish clear, authoritative content that directly addresses the inaccuracy — AI engines tend to update their responses as they encounter more accurate, well-cited sources.
+Not automatically. Ranking #1 on Google does not guarantee your brand will appear in AI-generated answers. AI search results can differ entirely from Google rankings for the same topic because the queries are longer, AI engines scan deeper in results (50-60 vs the top 3), and the synthesis logic is different. Gauge is designed to complement your existing SEO stack, not replace it.
 
 ---
 
 ### How many prompts should I track?
 
-We recommend starting with at least 10–20 prompts that cover a mix of:
-- Industry/problem-focused queries ("best tools for X")
-- Comparison queries ("[Brand] vs [Competitor]")
-- Direct branded queries ("What is [Brand]?")
-- Use-case queries ("How to do X")
+Start with 20-50 prompts covering a mix of:
+- Industry and problem-focused queries ("best tools for tracking AI search visibility")
+- Comparison queries ("[Your Brand] vs [Competitor]")
+- Use-case queries ("how to improve AI search visibility for SaaS")
+- Branded queries ("What is [Your Brand]?")
 
-More prompts give you a more complete picture of your AEO performance.
+Gauge's prompt generation feature can expand keyword research into a full prompt library automatically.
 
 ---
 
-### Does Gauge integrate with Slack?
+### How quickly do AEO improvements show results?
 
-Yes. You can connect Gauge to a Slack channel to receive automated alerts and weekly digests. Set this up in **Settings → Integrations**.
+Much faster than traditional SEO. Gauge customers typically see results in 2-8 weeks after taking action. Case studies include 2x visibility growth in 2 weeks, 5x growth in 4 weeks, and 416% improvement in under 30 days. Content briefs from the Action Center have driven 10%+ month-over-month visibility increases on an ongoing basis.
+
+---
+
+### What is the difference between citation rate and mention rate?
+
+Citation rate is how often an AI engine pulls one of your URLs as a source. Mention rate is how often your brand name is actually said in the generated answer when your content is cited.
+
+AI models frequently use your content to inform an answer without crediting your brand by name. High citation rate + low mention rate means your content is shaping AI answers but your brand is invisible to the reader. Refreshing cited content with brand-linked examples and proprietary data closes this gap.
+
+---
+
+### What integrations does Gauge support?
+
+- **Google Analytics 4** — AI referral traffic at the page level
+- **Google Search Console** — organic search data in Ask Gauge
+- **Semrush** — keyword and competitive SEO data in Ask Gauge
+- **Slack** — automated alerts and weekly digests
+- **Webflow** — publish AI-generated content directly to your CMS
+- **API + CSV exports** — programmatic data access and stakeholder reports
+- **S3/BI integration** — push data into existing data lakes and BI tooling
+
+Framer and Sanity CMS integrations are planned.
+
+---
+
+### What is Agency Mode?
+
+Agency Mode provides pitch workspaces that run 100 prompts across all AI models one time. It allows agencies to assess the current AI visibility landscape for a prospective client and demonstrate Gauge's value before committing to a subscription. It's designed as a client acquisition tool for agencies serving mid-market brands.
+
+---
+
+### What does Gauge cost?
+
+| Plan | Price | Prompts | Platforms |
+|---|---|---|---|
+| Starter | $99/mo | 100 | ChatGPT only |
+| Growth | $599/mo | 600 | ChatGPT, Google AIO, AI Mode, Gemini, Perplexity, Copilot |
+| Enterprise | Custom | Custom | All models + Claude + Grok |
+
+All plans include one country. Multiple countries are available on Enterprise. There is no public free trial on Starter or Growth.
 
 ---
 
 ### How do I get support?
 
-[Add your support contact — e.g., email, in-app chat, or a link to your support channel.]
+Reach out to the Gauge team via email or in-app chat. Enterprise customers have a dedicated Gauge specialist.

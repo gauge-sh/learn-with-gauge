@@ -1,6 +1,6 @@
 ---
 title: "AEO Glossary"
-description: "Definitions for key AEO and Gauge terms you'll encounter throughout this course and the platform."
+description: "Definitions for key AEO terms and Gauge-specific concepts you'll encounter throughout the platform."
 ---
 
 ## AEO Glossary
@@ -11,7 +11,7 @@ A reference for the core terms used in Answer Engine Optimization and throughout
 
 ### AEO (Answer Engine Optimization)
 
-The practice of optimizing a brand's presence in AI-generated answers produced by answer engines like ChatGPT, Perplexity, and Google Gemini. AEO is to AI search what SEO is to traditional search — a set of strategies to improve how and how often your brand appears in relevant responses.
+The practice of optimizing a brand's presence in AI-generated answers produced by answer engines like ChatGPT, Perplexity, and Google Gemini. Also called GEO (Generative Engine Optimization), AI SEO, or LLMO. The industry has not settled on a single term. AEO is to AI search what SEO is to traditional search: a set of strategies to improve how and how often your brand appears in relevant responses.
 
 ---
 
@@ -21,60 +21,90 @@ An AI-powered tool that responds to user queries with synthesized, conversationa
 
 ---
 
+### Brand Visibility
+
+The percentage of AI-generated answers to your tracked prompts that include a mention of your brand. This is the headline AEO metric in Gauge. A visibility score of 60% means your brand appears in 60 out of every 100 responses to your tracked prompts.
+
+---
+
 ### Citation
 
-When an AI engine directly references or links to a specific URL or source as the basis for part of its response. Citations are a strong signal that the AI engine treats that content as authoritative. Earning citations is one of the primary goals of an AEO content strategy.
+When an AI engine directly references or links to a specific URL from your domain as a source for part of its response. Citations are a strong signal that the AI engine treats your content as authoritative. Earning citations on relevant queries is one of the primary goals of an AEO content strategy.
+
+---
+
+### Citation Rate
+
+The percentage of AI-generated answers that cite a specific URL from your domain as a source. Tracked at both the domain level (aggregate) and URL level (per page) in Gauge.
+
+---
+
+### URL Mention Rate
+
+The percentage of answers where your brand name is explicitly named when your URL is cited. This is a separate and critical metric from citation rate. AI models frequently use your content to inform an answer without crediting your brand by name. A high citation rate with a low mention rate means you have a brand attribution gap that content improvements can close.
 
 ---
 
 ### Prompt
 
-A query or question submitted to an AI answer engine. In the context of Gauge, "prompts" refers to the specific queries your team has chosen to monitor — the questions your target customers are likely asking AI tools about your industry, use cases, or brand.
-
----
-
-### Visibility
-
-A Gauge metric that measures the percentage of your tracked prompts for which your brand appears in the AI-generated answer. A visibility score of 70% means your brand appears in 70 out of every 100 responses to your tracked prompts.
-
----
-
-### Rankings
-
-A Gauge metric that tracks where your brand appears relative to competitors when multiple brands are mentioned in an AI-generated answer. A ranking of 1 means your brand is mentioned first; higher numbers indicate your brand appears later in the response or less prominently.
+A query or question tracked in Gauge that represents what your target customers are likely asking AI tools. Gauge monitors each prompt daily across every configured AI engine and tracks how your brand and competitors appear over time.
 
 ---
 
 ### Branded Prompt
 
-A prompt that directly names your brand — for example, "What does [Brand] do?" or "Is [Brand] good for [use case]?". Branded prompts are tracked separately because they represent direct brand perception queries, where the AI's response has an outsized influence on potential customers.
+A prompt that includes your brand name directly, such as "What is [Brand]?" or "[Brand] vs [Competitor]?" Branded prompts are tracked separately because the AI's response to them directly shapes prospect perception before they visit your site.
 
 ---
 
-### Action Engine
+### Topics
 
-[Placeholder — define as relevant to Gauge's specific use of this term, if different from "answer engine".]
-
----
-
-### Branded Prompt Monitoring
-
-The practice of tracking AI-generated responses to queries that include your brand name, to ensure accuracy, completeness, and a favorable narrative.
+Thematic groupings of related prompts in Gauge. Rather than analyzing individual prompts in isolation, Topics aggregate visibility data across a feature set, use case, or market segment, making it easier to identify meaningful patterns and gaps.
 
 ---
 
-### Citation Gap
+### Rank
 
-A prompt where a competitor is being cited by AI engines but your brand is not. Citation gaps represent high-priority content opportunities — creating or improving content that could earn a citation for that prompt.
+Your brand's position relative to competitors when multiple brands are mentioned in the same AI-generated answer. Rank 1 means your brand is mentioned first. Gauge tracks this per prompt and as an average across all prompts.
+
+---
+
+### Health Score
+
+A 9-criteria technical grade that Gauge assigns to each page in your sitemap. It scores content against key criteria for AI and traditional search optimization. The audit runs nightly with a manual re-trigger option. Pages with low health scores are surfaced as structural improvement actions in the Action Center.
+
+---
+
+### Action Center
+
+The execution hub in Gauge where visibility data becomes specific, prioritized actions. Every recommendation in the Action Center is backed by the data that justifies it and is ranked by potential visibility impact. Actions include low mention rate fixes, content gaps, structural improvements, and influential citation opportunities.
+
+---
+
+### Content Engine
+
+Gauge's end-to-end content workflow: data-driven content calendar, brief generation, outline, full article draft, and CMS publishing. The Content Engine turns Action Center recommendations into published content without leaving the platform.
+
+---
+
+### Ask Gauge
+
+Gauge's AI marketing co-pilot. An agent interface with access to your AEO data, GA4, Google Search Console, Semrush, and company context. Ask Gauge analyzes data, draws conclusions, recommends actions, and creates content briefs and articles directly in the platform.
+
+---
+
+### Query Fan Out
+
+A Gauge feature that shows the actual Google searches an AI engine runs in the background when processing one of your tracked prompts. It reveals how AI engines discover content when generating an answer, and helps you understand what you'd need to rank for in order to influence specific AI responses.
+
+---
+
+### Fat Tail (AEO)
+
+A core strategic concept for AEO. In traditional SEO, most traffic goes to the top 3 results ("fat head"). In AI search, this is inverted: LLMs scan 50-60 results and synthesize them, so the long tail of niche queries carries significantly more weight. Net new content targeting specific, niche questions is the single highest-leverage AEO move.
 
 ---
 
 ### LLM (Large Language Model)
 
-The underlying AI technology that powers answer engines. LLMs like GPT-4, Claude, and Gemini are trained on large datasets and generate responses by predicting the most relevant and coherent answer to a query. The content and sources they were trained on, plus real-time retrieval, influence what they say about any given brand.
-
----
-
-### Retrieval-Augmented Generation (RAG)
-
-A technique used by many answer engines where the AI retrieves real-time web content to supplement its training data before generating a response. RAG means that current, well-structured web content can influence AI responses even after the model's training cutoff date.
+The underlying AI technology that powers answer engines. LLMs like GPT-4, Claude, and Gemini generate responses by drawing on training data and, in many cases, real-time web retrieval. The content and sources they're trained on, plus the live web results they fetch, both influence what they say about any given brand.
