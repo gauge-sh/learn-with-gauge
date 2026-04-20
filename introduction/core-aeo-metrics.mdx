@@ -6,80 +6,59 @@ description: "Learn the key metrics Gauge tracks to measure your brand's visibil
 <iframe
   width="100%"
   style={{ aspectRatio: "16/9", borderRadius: "8px", border: "none" }}
-  src="https://www.youtube.com/embed/PLACEHOLDER_VIDEO_ID"
+  src="https://www.youtube.com/embed/ImulkxSoo6w"
   title="Core AEO Metrics"
   allowFullScreen
 />
 
-## Summary
+## Core AEO Metrics
 
-<Note>
-  This lesson introduces every metric you'll see in Gauge - what each one measures, why it matters, and how to use them together to assess your AEO performance.
-</Note>
+There are three categories of metrics that matter in AI search. Understanding all three gives you a complete picture of how your brand is performing and where to focus your efforts.
 
-**Key Concepts:**
-- Brand Visibility = the % of AI answers where your brand appears
-- Citation Rate vs Mention Rate - these are different and both matter
-- Health Score grades your content against 9 criteria for AI optimization
-- Rank tracks your competitive position when multiple brands appear in the same answer
-- AI Referral Traffic connects what Gauge tracks to actual sessions in GA4
+## Category 1: AI Response Metrics
 
-## Overview
+These are the most important metrics. They measure what AI actually says about your brand when someone asks a relevant question.
 
 ### Brand Visibility
 
-**Definition:** The percentage of AI-generated answers to your tracked prompts that include a mention of your brand.
+**Brand visibility is the percentage of AI answers where your brand is mentioned.**
 
-This is the headline metric. A visibility score of 60% means your brand appears in 60 out of every 100 responses to your tracked prompts across the AI engines you're monitoring. It's the clearest single indicator of how present your brand is in the AI search landscape relevant to your business.
+When you track a set of prompts and run them through AI models, visibility tells you how often your brand shows up in those responses. A higher visibility score means more people asking those questions are being told about your brand.
 
-### URL Citation Rate
+This is the headline metric, the clearest single indicator of how present you are in the AI search landscape relevant to your business.
 
-**Definition:** The percentage of AI-generated answers that cite a specific URL from your domain as a source.
+### Citation Rate
 
-Citations are the raw material of GEO. When an AI engine cites your content, it's treating your page as an authoritative source. Gauge tracks this at both the domain level (aggregate) and URL level (page by page), so you can see exactly which content is earning trust with AI engines.
+**Citation rate is the percentage of AI answers that include a URL from your domain as a source.**
 
-### URL Mention Rate
+When an AI model cites your content, it's actively using your page to form its answer. This is the underlying driver of visibility. AI models cite content first, then mention brands. Earning more citations is the primary lever for improving brand visibility.
 
-**Definition:** The percentage of answers where your brand name is explicitly mentioned when your URL is cited.
+## Category 2: Website Metrics
 
-This is the metric that catches most teams off guard. AI models frequently pull your content as a source but generate an answer that doesn't name your brand at all. A high citation rate combined with a low mention rate means AI is using your content but not crediting you. Closing this gap - through brand-linked examples, proprietary data, and first-person perspectives - is one of the highest-value actions in GEO.
-
-### Rank
-
-**Definition:** Your brand's position relative to competitors when multiple brands are mentioned in the same AI-generated answer.
-
-Rank 1 means your brand is mentioned first. Higher numbers indicate your brand appears later or less prominently. Gauge tracks this across all your prompts and surfaces your average rank as well as per-prompt breakdowns.
-
-### Health Score
-
-**Definition:** A 9-criteria technical grade that scores each page in your sitemap against key criteria for AI and traditional search optimization.
-
-Gauge runs a nightly audit of your content against 9 optimization criteria and assigns a health score per page. This identifies specific technical and structural improvements you can make to increase the likelihood that AI engines cite your content. The audit re-runs every night with a manual re-trigger option when you publish new content.
+These metrics connect what's happening in AI answers to what's actually arriving on your website.
 
 ### AI Referral Traffic
 
-**Definition:** Real page-level sessions originating from AI platforms (ChatGPT, Perplexity, Gemini, etc.), tracked via GA4 integration.
-
-This connects everything Gauge tracks to actual business outcomes. Once you connect GA4, Gauge surfaces the actual traffic your brand is receiving from AI platforms at the page level - so you can see which AI engines are driving real sessions, not just mentions.
+Visitors who clicked a link inside an AI-generated answer and landed on your site. Modern analytics tools like GA4 track these sessions at the page level, so you can see which AI platforms are sending you real traffic.
 
 ### Leads from AI Search
 
-**Definition:** Conversion attribution from AI-originated discovery sessions.
+When a new customer signs up or contacts you, asking "how did you hear about us?" captures AI-originated discovery. These are leads where an AI answer was the first touchpoint, the metric that ties AEO directly to revenue.
 
-Track not just traffic but actual leads and conversions traced back to AI search as the discovery channel. This is the metric that justifies GEO investment to leadership.
+## Category 3: Web Crawl Metrics
 
-### Category Performance
+When AI models train or update, they send crawlers to read web pages. These crawlers identify themselves, and you can track which AI systems are actively accessing your content.
 
-**Definition:** Cross-topic visibility breakdown comparing your brand to competitors across different prompt categories.
+This tells you which models are reading your site, which is an early signal of future citation potential.
 
-Rather than looking at individual prompts in isolation, Category Performance gives you an aggregated view of how you're performing across thematic groups - by feature set, use case, market segment, or competitor comparison topic.
+## The Most Important Takeaway
 
-<Tip>
-  Start with Visibility and Citation Rate together. A high visibility score with a low citation rate suggests your brand is being mentioned without your content being treated as a source - a signal to build more authoritative, citable content.
-</Tip>
+Brand visibility and citation rate work together. The path to showing up in more AI answers is being cited more. The path to being cited more is creating content that AI models find authoritative, clear, and directly responsive to the questions your buyers are asking.
 
----
+> **Citations drive mentions. If you want AI to talk about you, you have to give AI something to cite.**
 
-<Card title="Next Lesson →" icon="arrow-right" href="/setup/integrations-and-settings">
-  Integrations & Settings
+That's the core of AEO and the foundation for everything else you'll learn in this course.
+
+<Card title="Next Lesson →" icon="arrow-right" href="/introduction/how-to-improve-ai-visibility">
+  How to Improve AI Visibility
 </Card>
