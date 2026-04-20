@@ -14,8 +14,9 @@
         "group": "Introduction",
         "pages": [
           "introduction/welcome",
-          "introduction/what-is-aeo",
-          "introduction/core-aeo-metrics"
+          "introduction/how-do-ai-models-search",
+          "introduction/core-aeo-metrics",
+          "introduction/how-to-improve-ai-visibility"
         ]
       },
       {
@@ -40,8 +41,7 @@
         "group": "Resources",
         "pages": [
           "resources/glossary",
-          "resources/faq",
-          "resources/changelog"
+          "resources/faq"
         ]
       }
     ]
