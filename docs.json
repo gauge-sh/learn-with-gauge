@@ -3,9 +3,13 @@
   "theme": "mint",
   "name": "Gauge Learn",
   "colors": {
-    "primary": "#0D9373",
-    "light": "#07C983",
-    "dark": "#0D9373"
+    "primary": "#051b23",
+    "light": "#e8ff3f",
+    "dark": "#000000",
+    "background": {
+      "light": "#f5f5f5",
+      "dark": "#000000"
+    }
   },
   "favicon": "/favicon.svg",
   "navigation": {
