@@ -11,55 +11,61 @@ A reference for the core terms used in Answer Engine Optimization and throughout
 
 ### AEO (Answer Engine Optimization)
 
-The practice of optimizing a brand's presence in AI-generated answers produced by answer engines like ChatGPT, Perplexity, and Google Gemini. Also called GEO (Generative Engine Optimization), AI SEO, or LLMO. The industry has not settled on a single term. AEO is to AI search what SEO is to traditional search: a set of strategies to improve how and how often your brand appears in relevant responses.
+The practice of optimizing a brand's presence in AI-generated answers produced by answer engines like ChatGPT, Perplexity, and Google Gemini. Also called GEO (Generative Engine Optimization), AI SEO, or LLMO. AEO is to AI search what SEO is to traditional search: a set of strategies to improve how and how often your brand appears in relevant responses.
 
 ---
 
 ### Answer Engine
 
-An AI-powered tool that responds to user queries with synthesized, conversational answers rather than a list of links. Examples include ChatGPT, Perplexity, Google Gemini, Claude, and Microsoft Copilot. Answer engines are increasingly how people research brands, products, and services.
+An AI-powered tool that responds to user queries with synthesized, conversational answers rather than a list of links. Examples include ChatGPT, Perplexity, Google Gemini, Claude, and Microsoft Copilot.
 
 ---
 
 ### Brand Visibility
 
-The percentage of AI-generated answers to your tracked prompts that include a mention of your brand. This is the headline AEO metric in Gauge. A visibility score of 60% means your brand appears in 60 out of every 100 responses to your tracked prompts.
+The percentage of AI-generated answers to your tracked prompts that include a mention of your brand. A visibility score of 60% means your brand appears in 60 out of every 100 responses to your tracked prompts. This is the headline metric in Gauge — also referred to as Brand Coverage on the Rankings page.
 
 ---
 
 ### Citation
 
-When an AI engine directly references or links to a specific URL from your domain as a source for part of its response. Citations are a strong signal that the AI engine treats your content as authoritative. Earning citations on relevant queries is one of the primary goals of an AEO content strategy.
+When an AI engine references or links to a specific URL from your domain as a source for part of its response. Citations are the underlying driver of brand visibility — AI models cite content first, then mention brands.
 
 ---
 
 ### Citation Rate
 
-The percentage of AI-generated answers that cite a specific URL from your domain as a source. Tracked at both the domain level (aggregate) and URL level (per page) in Gauge.
+The percentage of AI-generated answers that cite a specific URL from your domain as a source. Tracked at both the domain level and URL level in Gauge. On the Reddit page, citation rate also applies to specific Reddit threads and subreddits.
 
 ---
 
 ### URL Mention Rate
 
-The percentage of answers where your brand name is explicitly named when your URL is cited. This is a separate and critical metric from citation rate. AI models frequently use your content to inform an answer without crediting your brand by name. A high citation rate with a low mention rate means you have a brand attribution gap that content improvements can close.
+The percentage of answers where your brand name is explicitly named when your URL is cited. A high citation rate with a low mention rate means AI is using your content without crediting your brand — a gap that content improvements can close.
 
 ---
 
 ### Prompt
 
-A query or question tracked in Gauge that represents what your target customers are likely asking AI tools. Gauge monitors each prompt daily across every configured AI engine and tracks how your brand and competitors appear over time.
+A query tracked in Gauge that represents what your target customers are likely asking AI tools. Gauge monitors each prompt daily across every configured AI engine and tracks how your brand and competitors appear over time. Each prompt shows a search volume estimate and your exact visibility percentage.
+
+---
+
+### Non-Branded Prompt
+
+A prompt that makes no reference to your brand — for example, "What are the best AI SEO platforms?" The core KPI is visibility: how often does your brand get mentioned unprompted when AI thinks through the category?
 
 ---
 
 ### Branded Prompt
 
-A prompt that includes your brand name directly, such as "What is [Brand]?" or "[Brand] vs [Competitor]?" Branded prompts are tracked separately because the AI's response to them directly shapes prospect perception before they visit your site.
+A prompt that names your brand directly — for example, "How does Gauge help companies do AI SEO?" Visibility on branded prompts is always near 100%, so the metric that matters is what the AI actually says. Branded prompts are excluded from the Rankings page by default and are the primary input for Sentiment Analysis.
 
 ---
 
-### Topics
+### Topics / Topic Groups
 
-Thematic groupings of related prompts in Gauge. Rather than analyzing individual prompts in isolation, Topics aggregate visibility data across a feature set, use case, or market segment, making it easier to identify meaningful patterns and gaps.
+Thematic groupings of related prompts in Gauge. Topic groups aggregate visibility data across a feature, use case, or market segment. You can compare your visibility in a topic group directly against a competitor, and filter the Rankings page by topic to isolate performance in a specific category.
 
 ---
 
@@ -69,42 +75,102 @@ Your brand's position relative to competitors when multiple brands are mentioned
 
 ---
 
-### Health Score
+### AI Referral Traffic
 
-A 9-criteria technical grade that Gauge assigns to each page in your sitemap. It scores content against key criteria for AI and traditional search optimization. The audit runs nightly with a manual re-trigger option. Pages with low health scores are surfaced as structural improvement actions in the Action Center.
-
----
-
-### Action Center
-
-The execution hub in Gauge where visibility data becomes specific, prioritized actions. Every recommendation in the Action Center is backed by the data that justifies it and is ranked by potential visibility impact. Actions include low mention rate fixes, content gaps, structural improvements, and influential citation opportunities.
+Visitors who clicked a link inside an AI-generated answer and arrived on your site. Tracked at the page level in tools like GA4. The metric that connects AEO performance directly to website traffic.
 
 ---
 
-### Content Engine
+### Leads from AI Search
 
-Gauge's end-to-end content workflow: data-driven content calendar, brief generation, outline, full article draft, and CMS publishing. The Content Engine turns Action Center recommendations into published content without leaving the platform.
+Customers who first discovered your brand through an AI-generated answer. Captured by asking "how did you hear about us?" at signup or contact. The metric that ties AEO directly to revenue.
 
 ---
 
-### Ask Gauge
+### AI Crawler
 
-Gauge's AI marketing co-pilot. An agent interface with access to your AEO data, GA4, Google Search Console, Semrush, and company context. Ask Gauge analyzes data, draws conclusions, recommends actions, and creates content briefs and articles directly in the platform.
+A web crawler sent by an AI company (OpenAI, Google, Anthropic, etc.) to read and index web pages for model training or real-time retrieval. These crawlers identify themselves in server logs. Tracking which AI crawlers are accessing your content is an early signal of future citation potential.
+
+---
+
+### Web Retrieval
+
+When an AI model searches the web in real time before generating an answer, rather than relying solely on its training data. Most brand and category queries trigger web retrieval. AI search queries average around 11 words — much longer and more specific than human queries — and models typically run multiple searches per question.
+
+---
+
+### AI Search Query
+
+The search terms an AI model writes when it retrieves information from the web. AI queries are longer (~11 words), more specific, and often include words like *list*, *best*, *comparison*, and *2026*. They're designed to find roundups, rankings, and up-to-date content — which is why listicles and comparison pages perform well in AI search.
 
 ---
 
 ### Query Fan Out
 
-A Gauge feature that shows the actual Google searches an AI engine runs in the background when processing one of your tracked prompts. It reveals how AI engines discover content when generating an answer, and helps you understand what you'd need to rank for in order to influence specific AI responses.
+A Gauge feature that shows the actual web searches an AI engine runs when processing one of your tracked prompts. It reveals how AI models discover content and helps you understand what you'd need to rank for in order to influence specific AI responses.
 
 ---
 
 ### Fat Tail (AEO)
 
-A core strategic concept for AEO. In traditional SEO, most traffic goes to the top 3 results ("fat head"). In AI search, this is inverted: LLMs scan 50-60 results and synthesize them, so the long tail of niche queries carries significantly more weight. Net new content targeting specific, niche questions is the single highest-leverage AEO move.
+A core strategic concept for AEO. In traditional SEO, most value goes to the top few results. In AI search, LLMs scan 50–60 results and synthesize them, so niche, specific content carries significantly more weight. Writing content that targets precise, long-tail questions is the highest-leverage AEO strategy.
+
+---
+
+### Listicle
+
+The content format that consistently performs best in AI search — articles structured as ranked lists, comparisons, or roundups (e.g. "Best B2B billing automation software: 10 platforms ranked"). AI models actively search for this format. High-performing listicles name the problem, present options, and position your brand with a clear, well-argued case.
+
+---
+
+### AI Sentiment Analysis
+
+A Gauge feature that analyzes the language AI models use when describing your brand across all tracked prompts and responses. Goes beyond positive/negative scoring to surface specific themes, direct quotes, strengths, weaknesses, and competitive positioning — broken out by model and tracked over time.
+
+---
+
+### Sentiment Distribution
+
+The breakdown of positive, negative, and neutral tone across all AI responses that mention your brand. Tracked over time and split by model in Gauge's Sentiment Analysis dashboard.
+
+---
+
+### Ask Gauge
+
+Gauge's AI marketing agent. Connects your AEO data, Google Analytics, Search Console, ad data, and keyword research in one interface. Ask Gauge can pull performance reports, identify visibility gaps, generate content briefs, write outlines, and draft full articles — all grounded in your actual data and company context.
+
+---
+
+### Content Brief
+
+A structured document that outlines the goal, audience, angle, and key points for a piece of content. Ask Gauge generates content briefs from your visibility and gap data, turning AEO insights directly into actionable writing assignments.
+
+---
+
+### ChatGPT Ads
+
+Paid ad placements inside ChatGPT responses. Gauge tracks which competitors are running ads against your tracked prompts, shows their ad copy, and — if you connect your OpenAI Ads key — pulls in your own campaign performance including spend, impressions, CTR, and CPC. Ad-level prompt matching shows exactly which prompts each ad has appeared on.
+
+---
+
+### Organic vs. Paid AI Visibility
+
+The distinction between appearing in an AI answer through content (organic) and appearing through a paid ad placement (paid). Gauge shows both in the ChatGPT Ads view so you can see whether a competitor's paid placement is reaching people you're already reaching organically, or covering ground you're missing.
+
+---
+
+### Subreddit Citation Rate
+
+The percentage of your tracked prompts where a specific subreddit's content is cited in AI answers. Tracked in Gauge's Reddit section alongside individual URL citation rates. The subreddits with the highest citation rates are the communities most actively shaping what AI says about your category.
+
+---
+
+### Reddit Coverage Gap
+
+The difference between which Reddit threads cite competitors versus your brand. Visible in Gauge's Reddit section by comparing citation coverage across brands. A coverage gap on a high-citation thread is a direct signal of where your brand needs a presence.
 
 ---
 
 ### LLM (Large Language Model)
 
-The underlying AI technology that powers answer engines. LLMs like GPT-4, Claude, and Gemini generate responses by drawing on training data and, in many cases, real-time web retrieval. The content and sources they're trained on, plus the live web results they fetch, both influence what they say about any given brand.
+The underlying AI technology that powers answer engines. LLMs like GPT-4, Claude, and Gemini generate responses by drawing on training data and real-time web retrieval. What they've been trained on, plus what they fetch live, both influence what they say about any given brand. Each LLM uses a different search engine: ChatGPT uses Google, Claude uses Brave, and Microsoft Copilot uses Bing.

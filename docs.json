@@ -24,28 +24,15 @@
         ]
       },
       {
-        "group": "Setup",
-        "pages": [
-          "setup/integrations-and-settings"
-        ]
-      },
-      {
         "group": "Navigating Gauge",
         "pages": [
           "navigating/rankings-visibility",
           "navigating/prompts-citations",
-          "navigating/action-center",
           "navigating/ask-gauge",
           "navigating/reddit",
           "navigating/chatgpt-ads",
-          "navigating/branded-prompts"
-        ]
-      },
-      {
-        "group": "Resources",
-        "pages": [
-          "resources/glossary",
-          "resources/faq"
+          "navigating/branded-prompts",
+          "navigating/sentiment-analysis"
         ]
       }
     ]
