@@ -1,0 +1,239 @@
+---
+title: "AI Traffic"
+description: "See which AI crawlers and assistants are actually hitting your site — measured at the edge, with zero latency impact."
+---
+
+<iframe
+  width="100%"
+  style={{ aspectRatio: "16/9", borderRadius: "8px", border: "none" }}
+  src="https://www.youtube.com/embed/PLACEHOLDER_VIDEO_ID"
+  title="AI Traffic"
+  allowFullScreen
+/>
+
+## AI Traffic
+
+AI Traffic shows you the AI-originated requests reaching your site — `GPTBot`, `ChatGPT-User`, `PerplexityBot`, `ClaudeBot`, `Google-Extended`, and friends — with the path, status, and timestamp for every hit. Because AI crawlers and assistant fetchers generally don't execute JavaScript, they're invisible to GA4 and most other client-side analytics. AI Traffic fills that gap by measuring requests at the edge, before they ever hit your origin.
+
+## Our Approach: A Non-Blocking Cloudflare Worker
+
+Gauge deploys a small Cloudflare Worker in front of the zones you want to monitor. The Worker:
+
+1. Passes every incoming request through to your origin, untouched.
+2. Inspects the `User-Agent` header on the response path.
+3. Fires an asynchronous `POST` to a Gauge log drain with a compact event payload.
+
+The forward happens inside `ctx.waitUntil(...)`, which tells Cloudflare to keep the request context alive until the drain POST completes but **without delaying the response to the user**. The critical path stays identical to having no Worker at all — the response goes back to the visitor the moment your origin replies, and the drain POST runs concurrently on the edge.
+
+This design has a few useful properties:
+
+- **No origin changes.** The Worker runs at Cloudflare's edge. You don't install anything on your servers, and nothing about your app's request handling changes.
+- **Works on every Cloudflare plan, including Free.** The Worker uses only standard `fetch` APIs and `ctx.waitUntil` — both available on the Free tier.
+- **Longest-suffix zone matching.** One Worker script can serve multiple zones. At request time it picks the most specific matching zone config — so `docs.acme.com` inherits from `acme.com` unless you've configured `docs.acme.com` explicitly.
+- **Optional User-Agent filtering.** By default the Worker forwards every request that matches one of your configured route patterns, and Gauge identifies which ones are AI traffic on the ingest side. You can optionally switch a zone into allowlist mode to have the Worker itself drop anything that doesn't match a list of `User-Agent` substrings. See [Optional: Filtering at the Edge](#optional%3A-filtering-at-the-edge) below.
+
+## The Worker Code
+
+This is the exact script Gauge deploys. `DRAIN_URL` is templated with your org's drain endpoint at deploy time, `ZONE_CONFIGS` is templated with your per-zone filter rules, and `DRAIN_SECRET` is read at runtime from an encrypted Worker secret — so no credentials live in the script itself.
+
+```javascript worker.js
+// Gauge AI traffic forwarder (Cloudflare Worker).
+// Works on any Cloudflare plan, including Free.
+//
+// Reads DRAIN_SECRET from the Worker's environment (added as an encrypted
+// Secret under Settings -> Variables and Secrets), so no secret is ever
+// checked into your Worker source.
+
+const DRAIN_URL = "https://app.withgauge.com/webhooks/log-drain/cloudflare/<drain-token>";
+
+// Per-zone config keyed by the zone apex (e.g. "acme.com"). A zone with no
+// entry inherits {ua_filter_mode: "off"} = forward every request.
+// Default deploy has no entries — see "Optional: Filtering at the Edge" below.
+const ZONE_CONFIGS = {};
+
+export default {
+  async fetch(request, env, ctx) {
+    const response = await fetch(request);
+    if (shouldForward(request)) {
+      ctx.waitUntil(forward(request, response, env.DRAIN_SECRET));
+    }
+    return response;
+  },
+};
+
+function shouldForward(request) {
+  const url = new URL(request.url);
+  const cfg = pickZoneConfig(url.hostname.toLowerCase());
+  if (!cfg || cfg.ua_filter_mode === "off") return true;
+  if (cfg.ua_filter_mode === "allowlist") {
+    const ua = (request.headers.get("user-agent") || "").toLowerCase();
+    if (!ua) return false;
+    const patterns = cfg.ua_filter_patterns || [];
+    for (let i = 0; i < patterns.length; i++) {
+      if (ua.indexOf(patterns[i]) !== -1) return true;
+    }
+    return false;
+  }
+  return true;
+}
+
+function pickZoneConfig(host) {
+  let best = null;
+  let bestLen = -1;
+  for (const zoneName of Object.keys(ZONE_CONFIGS)) {
+    if (host === zoneName || host.endsWith("." + zoneName)) {
+      if (zoneName.length > bestLen) {
+        best = ZONE_CONFIGS[zoneName];
+        bestLen = zoneName.length;
+      }
+    }
+  }
+  return best;
+}
+
+async function forward(request, response, drainSecret) {
+  try {
+    const url = new URL(request.url);
+    const payload = {
+      EdgeStartTimestamp: new Date().toISOString(),
+      ClientRequestUserAgent: request.headers.get("user-agent") || "",
+      ClientRequestPath: url.pathname,
+      ClientRequestHost: url.hostname,
+      EdgeResponseStatus: response.status,
+      EdgeResponseBytes: Number(response.headers.get("content-length") || 0),
+      ClientCountry: (request.cf && request.cf.country) || "",
+    };
+
+    await fetch(DRAIN_URL, {
+      method: "POST",
+      headers: {
+        "content-type": "application/x-ndjson",
+        "authorization": "Bearer " + drainSecret,
+      },
+      body: JSON.stringify(payload),
+    });
+  } catch (e) {
+    console.error("gauge drain failed", e);
+  }
+}
+```
+
+### What Gets Forwarded
+
+The Worker sends a small JSON document per AI request — no request body, no response body, no cookies or auth headers. The fields are:
+
+- `EdgeStartTimestamp` — when the edge received the request
+- `ClientRequestUserAgent` — the raw `User-Agent` string, so Gauge can attribute each hit to a specific bot
+- `ClientRequestPath` — the path that was requested (e.g. `/blog/foo`)
+- `ClientRequestHost` — the hostname that was hit
+- `EdgeResponseStatus` — the HTTP status your origin returned
+- `EdgeResponseBytes` — the `Content-Length` of the response
+- `ClientCountry` — the two-letter country code Cloudflare attached to the request
+
+### Optional: Filtering at the Edge
+
+By default the Worker forwards every request your route patterns match, and Gauge identifies which ones are AI traffic on the ingest side. If you'd prefer the Worker to drop non-bot requests at Cloudflare's edge, you can flip a zone into allowlist mode from [Settings → Integrations → AI Traffic](https://app.withgauge.com/). The Worker will then forward only requests whose `User-Agent` matches a configured allowlist of bot substrings.
+
+<Warning>
+  Filtering at the edge is a one-way trip for any request it drops: the event never reaches Gauge, and there's no way to backfill it later. If a new AI crawler shows up next quarter with a `User-Agent` that isn't in your allowlist yet, you'll have no historical record of it on this zone until you update the allowlist. Leaving filtering off is the safer default — it costs you a bit more Worker request volume, but keeps your data complete.
+</Warning>
+
+## Deploying the Worker
+
+Head to [**Settings → Integrations → AI Traffic**](https://app.withgauge.com/) in Gauge. You have two paths:
+
+### Auto-deploy (recommended)
+
+Connect a scoped Cloudflare API token and Gauge will create the Worker script, attach the drain secret, and configure route patterns on each zone you pick. The Settings page shows each zone's deployment status, the active routes, the number of AI events received in the last hour, and the timestamp of the most recent event — so you can verify traffic is flowing within minutes.
+
+### Manual setup
+
+If you'd rather not hand Gauge an API token, the Settings page renders a copy-pasteable version of the Worker script (pre-filled with your drain URL and zone configs). You create the Worker in the Cloudflare dashboard, paste the script, add `DRAIN_SECRET` as an encrypted Worker variable, and wire up the routes yourself.
+
+<Tip>
+  The manual script is identical to what auto-deploy ships. If you start manual and switch to auto-deploy later, the code on Cloudflare won't change — only how it's managed.
+</Tip>
+
+## Zone Status
+
+Each zone in Settings shows one of four states so you always know where the Worker stands:
+
+- **Active** — deployed and receiving AI events.
+- **Deployed (silent)** — routes are configured, but nothing has matched in the last hour. Usually means the zone just doesn't see AI traffic yet, not that anything is broken.
+- **Manual** — events are arriving, but Gauge didn't create the routes. Typical for manual setups or Workers deployed before auto-deploy existed.
+- **Not deployed** — no routes, no events.
+
+## Troubleshooting
+
+If the zone shows **Deployed (silent)** — or you just don't see the hits you expect after deploying — the cause is almost always one of two things:
+
+### 1. The route pattern doesn't cover the hostname receiving the traffic
+
+Worker routes match specific hostnames, not the whole zone. A route like `acme.com/*` will not match requests to `www.acme.com` or `docs.acme.com`. If AI crawlers are fetching your blog at `blog.acme.com` but your route is `acme.com/*`, the Worker never runs for them and nothing is forwarded.
+
+**How to check:** In Settings, look at the route patterns listed under the zone. They need to include every hostname AI traffic actually lands on — typically both the apex (`acme.com/*`) and any subdomains that serve pages (`www.acme.com/*`, `blog.acme.com/*`, `docs.acme.com/*`). Add whatever's missing and re-save.
+
+**Fast sanity check from the command line:**
+
+```bash
+curl -sI -A "GPTBot" https://www.acme.com/ | head -n 5
+```
+
+If the Worker is running, the response will include Cloudflare's `cf-ray` / `server: cloudflare` headers; after ~30 seconds the event should show up in Gauge's "last event" timestamp for that zone.
+
+### 2. The DNS record isn't proxied through Cloudflare (gray cloud)
+
+Workers only run on traffic that flows through Cloudflare's proxy. If the DNS record for the hostname is set to **DNS only** (gray cloud) rather than **Proxied** (orange cloud), requests skip Cloudflare entirely and hit your origin directly — no Worker invocation, no logs.
+
+**How to check:** Open the zone in the Cloudflare dashboard → **DNS → Records**. Every hostname you want monitored needs to show a filled **orange cloud**. Flip any gray-cloud records for monitored hostnames to proxied and give DNS a minute to propagate.
+
+<Warning>
+  Some records deliberately stay gray-cloud — for example, `mail.` records for third-party email providers, or subdomains that can't terminate TLS at Cloudflare. Only switch to orange cloud for hostnames that serve HTTP(S) traffic you actually want to monitor.
+</Warning>
+
+### Other things to check
+
+- **Drain secret mismatch.** If you rotated the drain secret in Settings but didn't update `DRAIN_SECRET` on the Worker, the log drain will 401 every request. Re-pull the secret and update the Worker variable.
+- **Wrangler deploy vs. dashboard edits.** If you manage the Worker via `wrangler deploy`, a deploy can overwrite the encrypted secret if it isn't declared in your `wrangler.toml`. Re-add the secret after each deploy.
+- **Allowlist too strict.** If you enabled allowlist mode and provided an unusual pattern set, the Worker may be dropping traffic you wanted to see. The "Deployed (silent)" status with no events is often a too-narrow allowlist, not a routing problem.
+
+## Availability and Limits
+
+AI Traffic is available for all Gauge customers on any Cloudflare plan. The Worker uses only standard `fetch` and `ctx.waitUntil`, so there's nothing plan-gated in the code itself — but Cloudflare does count each inbound request as one Worker request against your account's quota:
+
+- **Workers Free** — 100,000 requests per day across your whole account.
+- **Workers Paid (\$5/month)** — 10 million requests per month included, then \$0.30 per additional million.
+
+If your site comfortably fits inside the Free tier today, AI Traffic will continue to fit. If you're close to the Free daily cap from other Workers or you're on a high-traffic zone, consider upgrading to Workers Paid or scoping the route patterns to just the hostnames and paths you care about (e.g. `/blog/*`, `/docs/*`) rather than the whole zone. The currently published limits are on [Cloudflare's Workers pricing page](https://developers.cloudflare.com/workers/platform/pricing/).
+
+## Alternative Approach: Logpush
+
+Cloudflare's [Logpush](https://developers.cloudflare.com/logs/logpush/) is a first-party feature that streams HTTP request logs off the edge to a customer-specified destination in batches. For customers on Cloudflare's Enterprise plan, Logpush is a viable alternative to the Worker — Cloudflare captures the logs, posts them to Gauge's drain endpoint, and Gauge filters server-side to the AI user-agents it tracks.
+
+The Logpush path uses the **same drain URL and secret** as the Worker, so switching between the two is purely a Cloudflare-side change. Gauge doesn't need to reconfigure anything on its end.
+
+### How it works
+
+[Settings → Integrations → AI Traffic](https://app.withgauge.com/) has a **Logpush (Enterprise)** tab that surfaces the drain details. The setup flow on the Cloudflare side is:
+
+1. In the Cloudflare dashboard, open the zone and add a **Logpush job** under **Analytics & Logs → Logs**.
+2. Select dataset **HTTP requests** and destination **HTTP**.
+3. Paste the Destination URL from [the drain details in Gauge](https://app.withgauge.com/).
+4. Under **Advanced options**, add an `Authorization` header with value `Bearer <your-saved-secret>`. [The Logpush tab in Settings](https://app.withgauge.com/) displays the secret; use **Regenerate** if you don't have it.
+5. On the **Configure fields** step, make sure `ClientRequestUserAgent` is selected — without it Gauge can't identify AI bots and the drain will receive useless logs. Recommended field set: `EdgeStartTimestamp`, `ClientRequestUserAgent`, `ClientRequestPath`, `ClientRequestHost`, `EdgeResponseStatus`, `EdgeResponseBytes`, `ClientCountry`.
+6. Save the job. Cloudflare sends a test batch; the zone's status in Settings flips to "Receiving events" once the first payload lands — typically within a few minutes.
+
+### Tradeoffs vs. the Worker
+
+**Where Logpush wins:**
+- **Nothing runs on your request path.** No Worker code, no per-request compute. Cloudflare captures logs as a side effect of normal request serving.
+- **Complete field coverage.** Every HTTP request field Cloudflare records is available — referer, cache status, firewall action, TLS version, etc. — so we can enrich AI Traffic views later without redeploying anything.
+- **Cheaper at very high volume.** Worker invocations bill per request; Logpush bills roughly per GB of logs delivered, which can be meaningfully cheaper for zones doing tens of millions of requests per month.
+
+**Where the Worker wins:**
+- **Plan availability.** The HTTP requests dataset in Logpush is gated to Cloudflare's **Enterprise plan**. Gauge customers on Free, Pro, or Business can't use this path at all — which is why the Worker is the default, since it runs on every plan including Free.
+- **Latency.** Worker events reach Gauge within seconds; Logpush batches deliver on a few-minute cadence. Not material for trend analysis, but noticeable if you're verifying a deploy or debugging in real time.
+- **Selectivity at the edge.** The Worker can drop non-AI requests before they ever leave Cloudflare (allowlist mode). Logpush ships the full firehose of selected fields and filters on the receiving side — more bytes in flight and a slightly larger data-sharing footprint.
+- **Setup simplicity.** The Worker is a one-click deploy from Settings. Logpush requires creating a job, configuring headers, and picking fields in the Cloudflare dashboard.
+
+If you're on Enterprise and would prefer a Workers-free setup, open the [Logpush tab in Settings](https://app.withgauge.com/) and follow the steps above — or email [company@withgauge.com](mailto:company@withgauge.com) and we'll walk you through it. For everyone else, the Worker is the recommended path.
